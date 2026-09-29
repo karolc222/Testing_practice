@@ -8,8 +8,8 @@ public class CompassTest {
 
     @Test
     @DisplayName("returns East when passed North and Right")
-
     void rotateNorthRightReturnsEast() {
+
         //arrange: create/setup what the test needs 
         Compass compass = new Compass();
 
@@ -27,6 +27,7 @@ public class CompassTest {
         Compass compass = new Compass();
 
         assertAll(
+            //method/act is inside assert as result
             () -> assertEquals(Point.EAST, compass.rotate(Point.NORTH, Direction.RIGHT)),
             () -> assertEquals(Point.SOUTH, compass.rotate(Point.EAST, Direction.RIGHT)),
             () -> assertEquals(Point.WEST, compass.rotate(Point.SOUTH, Direction.RIGHT)),

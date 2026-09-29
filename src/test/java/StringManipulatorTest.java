@@ -24,10 +24,10 @@ public class StringManipulatorTest {
     void checksIfStringIsAPalindrome() {
 
         StringManipulator stringManipulator = new StringManipulator();
-        String input = "hey";
+        String input = "level";
 
         boolean resultP = stringManipulator.isPalindrome(input);
 
-        assertEquals(false, resultP);
+        assertEquals(true, resultP);
         }
     }
