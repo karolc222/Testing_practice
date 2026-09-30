@@ -12,10 +12,10 @@ public class WordAnalyserTest {
     @DisplayName("checks for the longest word in a text")
     void returnsTheLongestWord() {
 
-        WordAnalyser wordAnalyser = new WordAnalyser();
+        WordAnalyser analyser = new WordAnalyser();
         String input = "I like apple honey";
 
-        List<String> result = wordAnalyser.findLongestWords(input);
+        List<String> result = analyser.findLongestWords(input);
 
         assertEquals(List.of("apple", "honey"), result);
     }
@@ -24,10 +24,10 @@ public class WordAnalyserTest {
     @DisplayName("calculates the frequency of each letter in a string")
     void returnsTheNumberOfLetters() {
 
-        WordAnalyser wordAnalyser = new WordAnalyser(); 
+        WordAnalyser analyser = new WordAnalyser(); 
         String input = "I like bees";
 
-        Map<Character, Integer> result = wordAnalyser.calculateLetterFrequency(input);
+        Map<Character, Integer> result = analyser.calculateLetterFrequency(input);
 
         assertEquals(Map.of(
             'i', 2, 

@@ -4,22 +4,22 @@ import java.util.HashMap;
 import java.util.Map; 
 
 public class WordAnalyser {
-    
+
     //METHOD 1
     public List<String> findLongestWords(String text) {
 
         String[] words = text.split(" ");
         List<String> longestWords = new ArrayList<>();
+    
+        int longestLength = words[0].length();
+        
+        for (String word : words) {
 
-            int longestLength = words[0].length();
+            if (word.length() > longestLength) {
 
-            for (String word : words) {
-
-                if (word.length() > longestLength) {
-
-                    longestLength = word.length();
-                    longestWords.clear();
-                    longestWords.add(word);
+                longestLength = word.length();
+                longestWords.clear();
+                longestWords.add(word);
 
 
             } else if ( word.length() == longestLength) {
