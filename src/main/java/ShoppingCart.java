@@ -10,7 +10,11 @@ public class ShoppingCart {
     }
 
     public double calculateTotalPrice() {
-        return 0;
+        double total = 0;
 
+        for (double price : items.values()) {
+            total += price;
+       }
+       return total;
     }
 }
