@@ -1,8 +1,8 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import java.util.List;
-import java.util.Map;
+import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PlaylistTest {
 
@@ -13,32 +13,35 @@ public class PlaylistTest {
     //calculates
 
     @Test //normal case 
-    @DisplayName("returns first tracks when playlist has tracks")
-    void returnsFirstTrackWhenPlaylistHasTracks() {
-
+    @DisplayName("returns first track")
+    void getCurrentTrack_returnsFirstTrack_whenPlaylistHasAnyTracks() {
+        //arrange
         Playlist playlist = new Playlist();
+        Track spectre = new Track("Spectre", "Bad Omens");
+        playlist.addTrack(spectre);
 
-        playlist.addTrack("Spectre", "Bad Omens");
+        //act 
+        Optional<Track> result = playlist.getCurrentTrack();
 
-        Optional<String> result = playlist.getCurrentTrack();
-
-        assertEquals(Optional.of("Spectre", "Bad Omens", result))
+        //assert 
+        assertEquals(Optional.of(spectre), result);
     }
 
 
     @Test //empty case 
     @DisplayName("returns empty when playlist has no tracks")
-    void returnsEmptyWhenPlaylistHasNoTracks() {
+    void getCurrentTrack_returnsEmpty_whenPlaylistHasNoTracks() {
         Playlist playlist = new Playlist(); 
 
-        Optional<String> result = playlist.getCurrentTracks();
+        Optional<Track> result = playlist.getCurrentTrack();
 
-        assertTrue(result.isEmpty);
+        assertTrue(result.isEmpty());
     }
 
+
     @Test //invalid case 
-    @DisplayName("throws exception if playlist has no tracks and play executes")
-    void throwsExceptionWhenTryingToPlayEmtyPlaylist() {
+    @DisplayName("throws exception when trying to play empty playlist")
+    void throwsException_whenTryingToPlayEmptyPlaylist() {
         Playlist playlist = new Playlist();
 
         assertThrows(IllegalStateException.class,
@@ -47,36 +50,56 @@ public class PlaylistTest {
 
     @Test //boundary case 
     @DisplayName("allows the playlist to contain precisely 50 tracks")
-    void allowsPlaylistWithExactly50Tracks() {
+    void addTrack_allowsExactly50Tracks() {
         Playlist playlist = new Playlist(); 
 
-        AssertEquals(playlist.size(50));
+        for (int i = 1; i <= 50; i++ ) {
+            playlist.addTrack(
+                new Track("Track " + i, "Artist " + i)
+            );
+        }
+
+        assertEquals(50, playlist.size());
     }
 
     @Test //boundary case 
-    @DisplayName("allows playlist to contain no more than 50 tracks")
+    @DisplayName("rejects adding a track when playlist is full")
     void rejectsMoreThan50Tracks() {
-        Playlist playlist = new Playlist():
+        //arrange
+        Playlist playlist = new Playlist();
 
+        //filling playlist with 50 tracks 
+        for (int i = 1; i <= 50; i++) {
+            playlist.addTrack(
+                new Track("Track " + i, "Artist " + i)
+            );
+        }
+
+        //act + assert
+        //reject track 51
         assertThrows(IllegalStateException.class,
-            () -> playlist.addTrack("Track 51");
+            () -> playlist.addTrack(new Track("Track 51", "Artist 51"))
         );
     }
 
     @Test //multiple cases 
-    @DisplayName("returns the first track in playlist, when it has multiple tracks")
-    void returnsFirstTrackWhenPlaylistContainsMultipleTracks() {
+    @DisplayName("returns the first track in playlist when playlist has multiple tracks")
+    void getCurrentTrack_returnsFirstTrack_whenPlaylistContainsMultipleTracks() {
+
+        //arrange
         Playlist playlist = new Playlist(); 
+        Track conduit = new Track("Conduit", "Russian Circles");
+        Track brokenMirror = new Track("Broken Mirror", "Architecs");
+        Track sewMeUp = new Track("Sew me up", "Spiritbox");
 
-        playlist.AddTrack("Conduit", "Russian Circles");
-        playlist.AddTrack("Broken Mirror", "Architects");
-        playlist.AddTrack("Sew me up", "Spiritbox";);
+        playlist.addTrack(conduit);
+        playlist.addTrack(brokenMirror);
+        playlist.addTrack(sewMeUp);
 
-        assertEquals(
-            Optional.of("Conduit", "Russian Circles"),
-            playlist.getCurrentTrack();
-        )
+        //act
+        Optional<Track> result = playlist.getCurrentTrack();
 
+        //assert
+        assertEquals(Optional.of(conduit), result);
     }
-
 }
