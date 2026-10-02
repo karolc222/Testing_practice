@@ -3,10 +3,10 @@ import java.util.Map;
 
 public class ShoppingCart {
     //map that stores items from the cart
-    private Map<String, Double> items = new HashMap<>();  
-    private double discount;
-    public double finalPrice;
+    private final Map<String, Double> items = new HashMap<>();
+    public double discount;
     public double total;
+    public double finalPrice;
 
     //METHOD 1
     public void addItem(String item, double price) {
@@ -15,21 +15,25 @@ public class ShoppingCart {
 
     //METHOD 2
     public double calculateTotalPrice() {
-        double total = 0;
+        total = 0;
 
         for (double price : items.values()) {
             total += price;
-       }
-       return total;
+        }
+        return total;
     }
 
+
     //METHOD 3
-    public void applyDiscount(double discount) {
+    public double applyDiscount(double discount) {
         //takes discount parameter and store it in this object's discount field
         this.discount = discount;
 
-        double finalPrice = total - discount;
+        total = calculateTotalPrice();
 
+        double discountAmount = total * discount;
+        double finalPrice = total - discountAmount;
+ 
         return finalPrice;
 
 

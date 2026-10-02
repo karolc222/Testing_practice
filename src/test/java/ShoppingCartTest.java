@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class ShoppingCartTest {
 
@@ -9,10 +9,10 @@ public class ShoppingCartTest {
 
     void addNewItem() {
 
-        ShoppingCart newCart = new ShoppingCart();
+        ShoppingCart cart = new ShoppingCart();
 
-        newCart.addItem("honey", 3.30);
-        double result = newCart.calculateTotalPrice(); 
+        cart.addItem("honey", 3.30);
+        double result = cart.calculateTotalPrice(); 
 
         assertEquals(3.30, result);
     }
@@ -24,12 +24,11 @@ public class ShoppingCartTest {
     void applyDiscountToTotalPrice() {
         //arrange
         ShoppingCart cart = new ShoppingCart();
-
         cart.addItem("honey", 10.00);
-        cart.applyDiscount(0.20);
-        
+
         //act
-        double result = items.calculateTotalPrice().applyDiscount();
+        double result = cart.applyDiscount(0.20);
+
         //assert
         assertEquals(8.00, result);
     }
