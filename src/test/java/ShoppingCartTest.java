@@ -22,14 +22,15 @@ public class ShoppingCartTest {
     @DisplayName("apply a discount to the cart")
 
     void applyDiscountToTotalPrice() {
-
+        //arrange
         ShoppingCart cart = new ShoppingCart();
 
         cart.addItem("honey", 10.00);
         cart.applyDiscount(0.20);
-
-        double result = cart.calculateTotalPrice();
-
+        
+        //act
+        double result = items.calculateTotalPrice().applyDiscount();
+        //assert
         assertEquals(8.00, result);
     }
 }

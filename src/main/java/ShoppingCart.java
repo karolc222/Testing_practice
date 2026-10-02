@@ -5,6 +5,8 @@ public class ShoppingCart {
     //map that stores items from the cart
     private Map<String, Double> items = new HashMap<>();  
     private double discount;
+    public double finalPrice;
+    public double total;
 
     //METHOD 1
     public void addItem(String item, double price) {
@@ -25,6 +27,12 @@ public class ShoppingCart {
     public void applyDiscount(double discount) {
         //takes discount parameter and store it in this object's discount field
         this.discount = discount;
+
+        double finalPrice = total - discount;
+
+        return finalPrice;
+
+
         
 
     }

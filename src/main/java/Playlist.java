@@ -1,19 +1,26 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
 public class Playlist {
 
-    //creating new playlist collection
+    //CREATE NEW PLAYLIST COLLECTION
     public final List<Track> playlist = new ArrayList<>();
+    public int maxSize = 50;
+    public boolean isPlaying = false; 
 
-    //method to add tracks to playlist 
+
+    //ADD TRACK TO PLAYLIST IF SIZE ALLOWS
     public void addTrack(Track track) {
-        playlist.add(track);
+        if (playlist.size() < maxSize) {
+            playlist.add(track);
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
-    //method to get the current track, returns an optional 
+    //GET CURRENT TRACK (returns optional)
     public Optional<Track> getCurrentTrack() {
         if
         (playlist.isEmpty()) {
@@ -22,11 +29,17 @@ public class Playlist {
         return Optional.of(playlist.get(0));
     }
 
-    public int size() {
+    public int getSize() {
         return playlist.size();
     }
 
-    public void play() {
-
+    // PLAY METHOD changes PLAYBACK STATE 
+    public Track play() {
+        if (playlist.isEmpty()) {
+            throw new IllegalStateException();
+    } else {
+        isPlaying = true;
+        return playlist.getFirst();
+        }
     }
 }

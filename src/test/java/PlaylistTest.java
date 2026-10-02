@@ -1,8 +1,10 @@
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
-
 import java.util.Optional;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class PlaylistTest {
 
@@ -12,7 +14,7 @@ public class PlaylistTest {
     //allows
     //calculates
 
-    @Test //normal case 
+    @Test //NORMAL case 
     @DisplayName("returns first track")
     void getCurrentTrack_returnsFirstTrack_whenPlaylistHasAnyTracks() {
         //arrange
@@ -28,7 +30,7 @@ public class PlaylistTest {
     }
 
 
-    @Test //empty case 
+    @Test //EMPTY case 
     @DisplayName("returns empty when playlist has no tracks")
     void getCurrentTrack_returnsEmpty_whenPlaylistHasNoTracks() {
         Playlist playlist = new Playlist(); 
@@ -39,7 +41,7 @@ public class PlaylistTest {
     }
 
 
-    @Test //invalid case 
+    @Test //INVALID case (play empty playlist)
     @DisplayName("throws exception when trying to play empty playlist")
     void throwsException_whenTryingToPlayEmptyPlaylist() {
         Playlist playlist = new Playlist();
@@ -48,7 +50,7 @@ public class PlaylistTest {
             () -> playlist.play());
     }
 
-    @Test //boundary case 
+    @Test //BOUNDARY case 
     @DisplayName("allows the playlist to contain precisely 50 tracks")
     void addTrack_allowsExactly50Tracks() {
         Playlist playlist = new Playlist(); 
@@ -59,11 +61,12 @@ public class PlaylistTest {
             );
         }
 
-        assertEquals(50, playlist.size());
+        assertEquals(50, playlist.getSize());
     }
 
-    @Test //boundary case 
-    @DisplayName("rejects adding a track when playlist is full")
+
+    @Test //BOUNDARY case 2
+    @DisplayName("rejects adding a track when playlist is at full 50")
     void rejectsMoreThan50Tracks() {
         //arrange
         Playlist playlist = new Playlist();
@@ -82,7 +85,8 @@ public class PlaylistTest {
         );
     }
 
-    @Test //multiple cases 
+
+    @Test //MULTIPLE cases 
     @DisplayName("returns the first track in playlist when playlist has multiple tracks")
     void getCurrentTrack_returnsFirstTrack_whenPlaylistContainsMultipleTracks() {
 
@@ -102,4 +106,22 @@ public class PlaylistTest {
         //assert
         assertEquals(Optional.of(conduit), result);
     }
+
+    @Test //PLAY IS VALID 
+    @DisplayName("returns and plays the first track in the playlist")
+    void getFirstTrack_playsTrack_returnsTrack() {
+
+        Playlist playlist = new Playlist(); 
+        Track TheFriends = new Track("The friends", "Nicholas Hooper");
+        playlist.addTrack(TheFriends);
+
+        playlist.play();
+
+        assertTrue(playlist.isPlaying);
+        //assertEquals(true, playlist.isPlaying);
+
+    }
+
+
+    
 }
