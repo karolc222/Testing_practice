@@ -10,6 +10,10 @@ public class ShoppingCart {
 
     //METHOD 1
     public void addItem(String item, double price) {
+        if (price < 0) {
+                throw new IllegalArgumentException();
+        }
+        
         items.put(item, price);
     }
 
