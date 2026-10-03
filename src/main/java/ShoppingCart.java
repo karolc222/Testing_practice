@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class ShoppingCart {
     //map that stores items from the cart
-    private final Map<String, Double> items = new HashMap<>();
+    public final Map<String, Double> items = new HashMap<>();
     public double discount;
     public double total;
     public double finalPrice;
@@ -33,11 +33,6 @@ public class ShoppingCart {
 
         double discountAmount = total * discount;
         double finalPrice = total - discountAmount;
- 
         return finalPrice;
-
-
-        
-
     }
 }
