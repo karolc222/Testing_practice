@@ -13,20 +13,21 @@ public class ShoppingCart {
         if (price < 0) {
                 throw new IllegalArgumentException();
         }
-        
         items.put(item, price);
     }
 
     //METHOD 2
     public double calculateTotalPrice() {
-        total = 0;
-
         for (double price : items.values()) {
-            total += price;
-        }
-        return total;
-    }
+            double remainingAmount = Double.MAX_VALUE - total;
 
+            if (price > remainingAmount) {
+                throw new ArithmeticException(); 
+                }
+                total += price;
+            }
+            return total;
+        }
 
     //METHOD 3
     public double applyDiscount(double discount) {

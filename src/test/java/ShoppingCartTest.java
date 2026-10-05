@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+
 public class ShoppingCartTest {
     @Test //NORMAL case
     @DisplayName("add an item and its price to the cart")
@@ -46,4 +47,14 @@ public class ShoppingCartTest {
             () -> cart.addItem("RedBull", -1.75));
     }
 
+    @Test //arithmetic EXCEPTION
+    @DisplayName("prevents a total that is bigger than the double max value")
+    void returnsArithmeticException_whenTheTotalIsBiggerThanDoubleMaxValue() {
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItem("Ice cream", Double.MAX_VALUE);
+        cart.addItem("Cake", Double.MAX_VALUE);
+
+        assertThrows(ArithmeticException.class, 
+            () -> cart.calculateTotalPrice());
+    }
 }

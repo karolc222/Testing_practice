@@ -60,7 +60,6 @@ public class PlaylistTest {
                 new Track("Track " + i, "Artist " + i)
             );
         }
-
         assertEquals(50, playlist.getSize());
     }
 
@@ -77,7 +76,6 @@ public class PlaylistTest {
                 new Track("Track " + i, "Artist " + i)
             );
         }
-
         //act + assert
         //reject track 51
         assertThrows(IllegalStateException.class,

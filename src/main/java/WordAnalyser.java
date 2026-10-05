@@ -1,6 +1,6 @@
-import java.util.List;
 import java.util.ArrayList; 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map; 
 
 public class WordAnalyser {
@@ -37,7 +37,6 @@ public class WordAnalyser {
        char[] letters = text.toLowerCase().toCharArray();
 
        for (char letter : letters) {
-        //skips when space 
         if (letter == ' ') {
             continue;
         }
