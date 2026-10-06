@@ -1,33 +1,42 @@
-import java.util.HashMap;
-import java.util.Map; 
+import java.util.ArrayList;
+import java.util.List;
 
 public class WarehouseInventory {
 
-    public int productId;
-    public int locationId; //max 64 products by location 
+    List<Product> productInventory = new ArrayList<>(); 
 
-    //get total nr of products 
-    //total amount of each product by productId
-    //list of all location ids 
-    //list of all product ids 
+    public Product addProductToLocation(int locationId, String productName) {
+        //generates an automatic productId
+        Product product = new Product();
+        product.productName = productName;
+        product.locationId  = locationId;
+        product.productId = productInventory.size();
+        product.itemQuantity = 1;
 
+        productInventory.add(product);
 
-    public void addProduct(String productName, int productId) {
-Map <String, Integer> productInventory = new HashMap<>(); 
-
+        return product;
     }
 
-    public int getTotalNumberProducts() {
-        for (product : Products) {
-            int count; 
-            int count++;
-            return count + id ;
-
+    //loop through to match locationId++
+    public int getTotalNumberAtLocation(int locationId) {
+        int count = 0;
+        for (Product product : productInventory) {
+            //the location is stored inside the product
+            int location = product.getLocationId();
+            if (location == locationId) {
+                count++;
+            }
         }
-        return int totalProducts;
-    } 
+        return count;
+    }
 
+    public int getItemAmount(int productId, int locationId) {
+        productInventory.get(productId);
+        return 0; //productId().itemQuantity;
+    }
 
+    //public setMaxCapacityAtLocation() {}
 
-    
 }
+
